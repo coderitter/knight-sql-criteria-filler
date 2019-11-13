@@ -1,0 +1,35 @@
+{
+  "name": "mega-nice-sql-query-builder",
+  "version": "1.0.0",
+  "description": "A mega nice SQL query builder which works with mega nice SQL query options",
+  "main": "lib/sqlQueryBuilder.js",
+  "types": "lib/sqlQueryBuilder.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "mega-nice-sql": "^1.0.1",
+    "mega-nice-sql-query-options": "^1.0.1"
+  },
+  "devDependencies": {
+    "ts-node": "^8.4.1",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "test": "mocha -r ts-node/register test/**/*.spec.ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c0deritter/mega-nice-sql-query-builder.git"
+  },
+  "keywords": [
+    ""
+  ],
+  "author": "Coderitter GmbH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/c0deritter/mega-nice-sql-query-builder/issues"
+  },
+  "homepage": "https://github.com/c0deritter/mega-nice-sql-query-builder#readme"
+}
