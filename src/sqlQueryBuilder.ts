@@ -1,5 +1,5 @@
 import { Query } from "mega-nice-sql"
-import SqlQueryOptions from "mega-nice-sql-query-options"
+import { SqlQueryOptions } from "mega-nice-sql-query-options"
 
 export function fillSqlQuery(query: Query, options: SqlQueryOptions | undefined, columns: string[]) {
   if (options == undefined) {
