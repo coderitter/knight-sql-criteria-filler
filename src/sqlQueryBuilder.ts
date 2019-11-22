@@ -1,5 +1,5 @@
 import { Query } from 'mega-nice-sql'
-import { SqlQueryOptions, SqlReadOptions, SqlInsertOptions, SqlUpdateOptions, SqlDeleteOptions } from 'mega-nice-sql-query-options'
+import { SqlQueryOptions, SqlSelectOptions, SqlInsertOptions, SqlUpdateOptions, SqlDeleteOptions } from 'mega-nice-sql-query-options'
 
 export function fillSqlQuery(query: Query, options: SqlQueryOptions|undefined, columns: string[]) {
   if (options == undefined) {
@@ -122,7 +122,7 @@ export function fillSqlInsertQuery(query: Query, options: SqlInsertOptions|undef
   }
 }
 
-export function fillSqlSelectQuery(query: Query, options: SqlReadOptions|undefined, columns: string[]) {
+export function fillSqlSelectQuery(query: Query, options: SqlSelectOptions|undefined, columns: string[]) {
   fillSqlQuery(query, options, columns)
 }
 
