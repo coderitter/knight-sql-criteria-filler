@@ -1,6 +1,6 @@
 {
   "name": "mega-nice-sql-query-builder",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "A mega nice SQL query builder which works with mega nice SQL query options",
   "main": "lib/sqlQueryBuilder.js",
   "types": "lib/sqlQueryBuilder.d.ts",
@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "mega-nice-sql": "^1.1.0",
-    "mega-nice-sql-query-options": "^4.0.0"
+    "mega-nice-sql-query-options": "^5.0.0"
   },
   "devDependencies": {
     "ts-node": "^8.4.1",
