@@ -8,12 +8,12 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "mega-nice-sql": "^1.1.0",
-    "mega-nice-sql-query-options": "^5.0.0"
+    "mega-nice-sql": "^1.2.4",
+    "mega-nice-sql-query-options": "^5.2.0"
   },
   "devDependencies": {
-    "ts-node": "^8.4.1",
-    "typescript": "^3.7.2"
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
   },
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
