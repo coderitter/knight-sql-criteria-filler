@@ -1,7 +1,7 @@
 import { Query } from 'mega-nice-sql'
-import { SqlQueryOptions, SqlSelectOptions, SqlInsertOptions, SqlUpdateOptions, SqlDeleteOptions } from 'mega-nice-sql-query-options'
+import { DbCriteria, DbSelectOptions, DbInsertOptions, DbUpdateOptions, DbDeleteOptions } from 'mega-nice-db-query-options'
 
-export function fillSqlQuery(query: Query, options: SqlQueryOptions|undefined, columns: string[]) {
+export function fillWhere(query: Query, options: DbCriteria|undefined, columns: string[]) {
   if (options == undefined) {
     return 
   }
@@ -86,13 +86,13 @@ export function fillSqlQuery(query: Query, options: SqlQueryOptions|undefined, c
     if (typeof options.orderBy === 'string') {
       query.orderBy(options.orderBy)
     }
-    else if (typeof options.orderBy === 'object' && 'column' in options.orderBy) {
-      query.orderBy(options.orderBy.column, options.orderBy.direction)
+    else if (typeof options.orderBy === 'object' && 'field' in options.orderBy) {
+      query.orderBy(options.orderBy.field, options.orderBy.direction)
     }
     else if (options.orderBy instanceof Array) {
       for (let orderBy of options.orderBy) {
-        if (typeof orderBy === 'object' && 'column' in orderBy) {
-          query.orderBy(orderBy.column, orderBy.direction)
+        if (typeof orderBy === 'object' && 'field' in orderBy) {
+          query.orderBy(orderBy.field, orderBy.direction)
         }
       }    
     }
@@ -107,7 +107,7 @@ export function fillSqlQuery(query: Query, options: SqlQueryOptions|undefined, c
   }
 }
 
-export function fillSqlInsertQuery(query: Query, options: SqlInsertOptions|undefined, columns: string[]) {
+export function fillSqlInsertQuery(query: Query, options: DbInsertOptions|undefined, columns: string[]) {
   if (options == undefined) {
     return 
   }
@@ -122,11 +122,11 @@ export function fillSqlInsertQuery(query: Query, options: SqlInsertOptions|undef
   }
 }
 
-export function fillSqlSelectQuery(query: Query, options: SqlSelectOptions|undefined, columns: string[]) {
-  fillSqlQuery(query, options, columns)
+export function fillSqlSelectQuery(query: Query, options: DbSelectOptions|undefined, columns: string[]) {
+  fillWhere(query, options, columns)
 }
 
-export function fillSqlUpdateQuery(query: Query, options: SqlUpdateOptions|undefined, columns: string[]) {
+export function fillSqlUpdateQuery(query: Query, options: DbUpdateOptions|undefined, columns: string[]) {
   if (options == undefined) {
     return 
   }
@@ -140,11 +140,11 @@ export function fillSqlUpdateQuery(query: Query, options: SqlUpdateOptions|undef
     }
   }
 
-  fillSqlQuery(query, options.queryOptions, columns)
+  fillWhere(query, options.queryOptions, columns)
 }
 
-export function fillSqlDeleteQuery(query: Query, options: SqlDeleteOptions|undefined, columns: string[]) {
-  return fillSqlQuery(query, options, columns)
+export function fillSqlDeleteQuery(query: Query, options: DbDeleteOptions|undefined, columns: string[]) {
+  return fillWhere(query, options, columns)
 }
 
 function isOurConditionObject(value: any): boolean {
