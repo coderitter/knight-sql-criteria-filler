@@ -4,7 +4,7 @@
 
 `npm install mega-nice-sql-query-builder`
 
-This package uses [mega-nice-sql](https://github.com/c0deritter/mega-nice-sql) and [mega-nice-sql-query-options](https://github.com/c0deritter/mega-nice-sql-query-options).
+This package uses [mega-nice-sql](https://github.com/c0deritter/mega-nice-sql) and [mega-nice-db-query-options](https://github.com/c0deritter/mega-nice-db-query-options).
 
 ## Overview
 
