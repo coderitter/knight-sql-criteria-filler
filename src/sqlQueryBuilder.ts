@@ -1,7 +1,7 @@
 import { Query } from 'mega-nice-sql'
 import { DbCriteria, DbSelectOptions, DbInsertOptions, DbUpdateOptions, DbDeleteOptions } from 'mega-nice-db-query-options'
 
-export function fillWhere(query: Query, options: DbCriteria|undefined, columns: string[]) {
+export function fillCriteria(query: Query, options: DbCriteria|undefined, columns: string[]) {
   if (options == undefined) {
     return 
   }
@@ -123,7 +123,7 @@ export function fillSqlInsertQuery(query: Query, options: DbInsertOptions|undefi
 }
 
 export function fillSqlSelectQuery(query: Query, options: DbSelectOptions|undefined, columns: string[]) {
-  fillWhere(query, options, columns)
+  fillCriteria(query, options, columns)
 }
 
 export function fillSqlUpdateQuery(query: Query, options: DbUpdateOptions|undefined, columns: string[]) {
@@ -140,11 +140,11 @@ export function fillSqlUpdateQuery(query: Query, options: DbUpdateOptions|undefi
     }
   }
 
-  fillWhere(query, options.queryOptions, columns)
+  fillCriteria(query, options.criteria, columns)
 }
 
 export function fillSqlDeleteQuery(query: Query, options: DbDeleteOptions|undefined, columns: string[]) {
-  return fillWhere(query, options, columns)
+  return fillCriteria(query, options, columns)
 }
 
 function isOurConditionObject(value: any): boolean {
