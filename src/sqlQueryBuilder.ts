@@ -1,5 +1,5 @@
+import { DbCreateOptions, DbCriteria, DbDeleteOptions, DbInsertOptions, DbReadOptions, DbSelectOptions, DbUpdateOptions } from 'mega-nice-db-query-options'
 import { Query } from 'mega-nice-sql'
-import { DbCriteria, DbSelectOptions, DbInsertOptions, DbUpdateOptions, DbDeleteOptions, DbReadOptions, DbFindOptions } from 'mega-nice-db-query-options'
 
 export function fillCriteria(query: Query, options: DbCriteria|undefined, columns: string[]) {
   if (options == undefined) {
@@ -107,7 +107,7 @@ export function fillCriteria(query: Query, options: DbCriteria|undefined, column
   }
 }
 
-export function fillSqlInsertQuery(query: Query, options: DbInsertOptions|undefined, columns: string[]) {
+export function fillSqlInsertQuery(query: Query, options: DbCreateOptions|DbInsertOptions|undefined, columns: string[]) {
   if (options == undefined) {
     return 
   }
@@ -122,23 +122,8 @@ export function fillSqlInsertQuery(query: Query, options: DbInsertOptions|undefi
   }
 }
 
-export function fillSqlSelectQuery(query: Query, options: DbSelectOptions|undefined, columns: string[]) {
+export function fillSqlSelectQuery(query: Query, options: DbReadOptions|DbSelectOptions|undefined, columns: string[]) {
   fillCriteria(query, options, columns)
-}
-
-export function toSqlSelectQuery(options: DbSelectOptions|DbReadOptions|DbFindOptions|undefined, columns: string[]): Query {
-  let query = new Query
-  
-  if (options && options.count === true) {
-    query.select('COUNT(*)')
-  }
-  else {
-    query.select('*')
-  }
-
-  fillSqlSelectQuery(query, options, columns)
-
-  return query
 }
 
 export function fillSqlUpdateQuery(query: Query, options: DbUpdateOptions|undefined, columns: string[]) {
