@@ -126,10 +126,10 @@ export function fillSqlSelectQuery(query: Query, options: DbSelectOptions|undefi
   fillCriteria(query, options, columns)
 }
 
-export function toSqlSelectQuery(options: DbSelectOptions|DbReadOptions|DbFindOptions, columns: string[]): Query {
+export function toSqlSelectQuery(options: DbSelectOptions|DbReadOptions|DbFindOptions|undefined, columns: string[]): Query {
   let query = new Query
   
-  if (options.count === true) {
+  if (options && options.count === true) {
     query.select('COUNT(*)')
   }
   else {
