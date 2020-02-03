@@ -1,5 +1,8 @@
-import { DbCreateOptions, DbCriteria, DbDeleteOptions, DbInsertOptions, DbReadOptions, DbSelectOptions, DbUpdateOptions } from 'mega-nice-db-query-options'
+import { DbCreateParameter, DbCriteria, DbDeleteParameter, DbInsertParameter, DbReadParameter, DbSelectParameter, DbUpdateParameter } from 'mega-nice-db-query-parameter'
 import { Query } from 'mega-nice-sql'
+
+// DeviceTypeDb.select parameter = { id: [] }
+// DeviceTypeDb.select sql = SELECT * FROM deviceType WHERE id IN ($1);
 
 export function fillCriteria(query: Query, options: DbCriteria|undefined, columns: string[]) {
   if (options == undefined) {
@@ -107,7 +110,7 @@ export function fillCriteria(query: Query, options: DbCriteria|undefined, column
   }
 }
 
-export function fillSqlInsertQuery(query: Query, options: DbCreateOptions|DbInsertOptions|undefined, columns: string[]) {
+export function fillSqlInsertQuery(query: Query, options: DbCreateParameter|DbInsertParameter|undefined, columns: string[]) {
   if (options == undefined) {
     return 
   }
@@ -122,11 +125,11 @@ export function fillSqlInsertQuery(query: Query, options: DbCreateOptions|DbInse
   }
 }
 
-export function fillSqlSelectQuery(query: Query, options: DbReadOptions|DbSelectOptions|undefined, columns: string[]) {
+export function fillSqlSelectQuery(query: Query, options: DbReadParameter|DbSelectParameter|undefined, columns: string[]) {
   fillCriteria(query, options, columns)
 }
 
-export function fillSqlUpdateQuery(query: Query, options: DbUpdateOptions|undefined, columns: string[]) {
+export function fillSqlUpdateQuery(query: Query, options: DbUpdateParameter|undefined, columns: string[]) {
   if (options == undefined) {
     return 
   }
@@ -143,7 +146,7 @@ export function fillSqlUpdateQuery(query: Query, options: DbUpdateOptions|undefi
   fillCriteria(query, options.criteria, columns)
 }
 
-export function fillSqlDeleteQuery(query: Query, options: DbDeleteOptions|undefined, columns: string[]) {
+export function fillSqlDeleteQuery(query: Query, options: DbDeleteParameter|undefined, columns: string[]) {
   return fillCriteria(query, options, columns)
 }
 
