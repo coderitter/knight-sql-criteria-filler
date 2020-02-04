@@ -4,15 +4,15 @@ import { Query } from 'mega-nice-sql'
 // DeviceTypeDb.select parameter = { id: [] }
 // DeviceTypeDb.select sql = SELECT * FROM deviceType WHERE id IN ($1);
 
-export function fillCriteria(query: Query, options: DbCriteria|undefined, columns: string[]) {
-  if (options == undefined) {
+export function fillCriteria(query: Query, criteria: DbCriteria|undefined, columns: string[]) {
+  if (criteria == undefined) {
     return 
   }
 
-  for (let prop in options) {
-    if (Object.prototype.hasOwnProperty.call(options, prop)) {
+  for (let prop in criteria) {
+    if (Object.prototype.hasOwnProperty.call(criteria, prop)) {
       if (columns.indexOf(prop) > -1) {
-        let value = options[prop]
+        let value = criteria[prop]
 
         // console.debug(`Processing field ${field}`, value)
 
@@ -85,15 +85,15 @@ export function fillCriteria(query: Query, options: DbCriteria|undefined, column
     }
   }
 
-  if (options.orderBy != undefined) {
-    if (typeof options.orderBy === 'string') {
-      query.orderBy(options.orderBy)
+  if (criteria.orderBy != undefined) {
+    if (typeof criteria.orderBy === 'string') {
+      query.orderBy(criteria.orderBy)
     }
-    else if (typeof options.orderBy === 'object' && 'field' in options.orderBy) {
-      query.orderBy(options.orderBy.field, options.orderBy.direction)
+    else if (typeof criteria.orderBy === 'object' && 'field' in criteria.orderBy) {
+      query.orderBy(criteria.orderBy.field, criteria.orderBy.direction)
     }
-    else if (options.orderBy instanceof Array) {
-      for (let orderBy of options.orderBy) {
+    else if (criteria.orderBy instanceof Array) {
+      for (let orderBy of criteria.orderBy) {
         if (typeof orderBy === 'object' && 'field' in orderBy) {
           query.orderBy(orderBy.field, orderBy.direction)
         }
@@ -101,53 +101,53 @@ export function fillCriteria(query: Query, options: DbCriteria|undefined, column
     }
   }
 
-  if (options.limit != undefined) {
-    query.limit(options.limit)
+  if (criteria.limit != undefined) {
+    query.limit(criteria.limit)
   }
 
-  if (options.offset != undefined) {
-    query.offset(options.offset)
+  if (criteria.offset != undefined) {
+    query.offset(criteria.offset)
   }
 }
 
-export function fillSqlInsertQuery(query: Query, options: DbCreateParameter|DbInsertParameter|undefined, columns: string[]) {
-  if (options == undefined) {
+export function fillSqlInsertQuery(query: Query, parameter: DbCreateParameter|DbInsertParameter|undefined, columns: string[]) {
+  if (parameter == undefined) {
     return 
   }
 
-  for (let column in options) {
-    if (Object.prototype.hasOwnProperty.call(options, column)) {
+  for (let column in parameter) {
+    if (Object.prototype.hasOwnProperty.call(parameter, column)) {
       if (columns.indexOf(column) > -1) {
-        let value = options[column]
+        let value = parameter[column]
         query.value(column, value)
       }
     }
   }
 }
 
-export function fillSqlSelectQuery(query: Query, options: DbReadParameter|DbSelectParameter|undefined, columns: string[]) {
-  fillCriteria(query, options, columns)
+export function fillSqlSelectQuery(query: Query, parameter: DbReadParameter|DbSelectParameter|undefined, columns: string[]) {
+  fillCriteria(query, parameter, columns)
 }
 
-export function fillSqlUpdateQuery(query: Query, options: DbUpdateParameter|undefined, columns: string[]) {
-  if (options == undefined) {
+export function fillSqlUpdateQuery(query: Query, parameter: DbUpdateParameter|undefined, columns: string[]) {
+  if (parameter == undefined) {
     return 
   }
 
-  for (let column in options) {
-    if (Object.prototype.hasOwnProperty.call(options, column)) {
+  for (let column in parameter) {
+    if (Object.prototype.hasOwnProperty.call(parameter, column)) {
       if (columns.indexOf(column) > -1) {
-        let value = options[column]
+        let value = parameter[column]
         query.set(column, value)
       }
     }
   }
 
-  fillCriteria(query, options.criteria, columns)
+  fillCriteria(query, parameter.criteria, columns)
 }
 
-export function fillSqlDeleteQuery(query: Query, options: DbDeleteParameter|undefined, columns: string[]) {
-  return fillCriteria(query, options, columns)
+export function fillSqlDeleteQuery(query: Query, parameter: DbDeleteParameter|undefined, columns: string[]) {
+  return fillCriteria(query, parameter, columns)
 }
 
 function isOurConditionObject(value: any): boolean {
