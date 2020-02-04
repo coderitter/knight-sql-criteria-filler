@@ -1,9 +1,6 @@
 import { DbCreateParameter, DbCriteria, DbDeleteParameter, DbInsertParameter, DbReadParameter, DbSelectParameter, DbUpdateParameter } from 'mega-nice-db-query-parameter'
 import { Query } from 'mega-nice-sql'
 
-// DeviceTypeDb.select parameter = { id: [] }
-// DeviceTypeDb.select sql = SELECT * FROM deviceType WHERE id IN ($1);
-
 export function fillCriteria(query: Query, criteria: DbCriteria|undefined, columns: string[]) {
   if (criteria == undefined) {
     return 

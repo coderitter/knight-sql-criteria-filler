@@ -1,6 +1,6 @@
 import { expect } from 'chai'
+import { Query } from 'mega-nice-sql'
 import 'mocha'
-import sql, { Query } from 'mega-nice-sql'
 import { fillCriteria } from '../src/sqlQueryBuilder'
 
 describe('fillCriteria', function() {
