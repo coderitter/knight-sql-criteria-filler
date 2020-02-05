@@ -36,16 +36,44 @@ describe('fillCriteria', function() {
   })
 
   it('should add a null criterium', function() {
-    let criteria = {
+    let criteria1 = {
       a: null
     }
 
-    let query = new Query
-    fillCriteria(query, criteria, ['a'])
+    let query1 = new Query
+    fillCriteria(query1, criteria1, ['a'])
     
-    expect((<any> query)._wheres.length).to.equal(1)
-    expect((<any> query)._wheres[0].column).to.equal('a')
-    expect((<any> query)._wheres[0].operator).to.equal('IS NULL')
+    expect((<any> query1)._wheres.length).to.equal(1)
+    expect((<any> query1)._wheres[0].column).to.equal('a')
+    expect((<any> query1)._wheres[0].operator).to.equal('IS')
+    expect((<any> query1)._wheres[0].value).to.equal('NULL')
+
+    let criteria2 = {
+      a: 'IS NULL'
+    }
+
+    let query2 = new Query
+    fillCriteria(query2, criteria2, ['a'])
+    
+    expect((<any> query2)._wheres.length).to.equal(1)
+    expect((<any> query2)._wheres[0].column).to.equal('a')
+    expect((<any> query2)._wheres[0].operator).to.equal('IS')
+    expect((<any> query2)._wheres[0].value).to.equal('NULL')
+
+    let criteria3 = {
+      a: {
+        operator: 'IS',
+        value: 'NULL'
+      }
+    }
+
+    let query3 = new Query
+    fillCriteria(query3, criteria3, ['a'])
+    
+    expect((<any> query3)._wheres.length).to.equal(1)
+    expect((<any> query3)._wheres[0].column).to.equal('a')
+    expect((<any> query3)._wheres[0].operator).to.equal('IS')
+    expect((<any> query3)._wheres[0].value).to.equal('NULL')
   })
 
   it('should create an IN operator of an array of values', function() {

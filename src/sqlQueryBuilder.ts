@@ -11,7 +11,7 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, colum
       if (columns.indexOf(prop) > -1) {
         let value = criteria[prop]
 
-        // console.debug(`Processing field ${field}`, value)
+        // console.debug(`Processing prop '${prop}':`, value)
 
         if (value !== undefined) {
           if (value === null) {
