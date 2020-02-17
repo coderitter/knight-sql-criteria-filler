@@ -170,4 +170,27 @@ describe('fillCriteria', function() {
     expect((<any> query)._wheres[0].operator).to.equal('IN')
     expect((<any> query)._wheres[0].value).to.deep.equal([])
   })
+
+  it('should regard inherited properties', function() {
+    let criteria = new TestSubCriteria
+
+    let query = new Query
+    fillCriteria(query, criteria, ['a', 'b'])
+
+    expect((<any> query)._wheres.length).to.equal(2)
+    expect((<any> query)._wheres[0].column).to.equal('a')
+    expect((<any> query)._wheres[0].operator).to.equal('=')
+    expect((<any> query)._wheres[0].value).to.deep.equal('a')
+    expect((<any> query)._wheres[1].column).to.equal('b')
+    expect((<any> query)._wheres[1].operator).to.equal('=')
+    expect((<any> query)._wheres[1].value).to.deep.equal(1)
+  })
 })
+
+class TestCriteria {
+  a = 'a'
+}
+
+class TestSubCriteria extends TestCriteria {
+  b = 1
+}
