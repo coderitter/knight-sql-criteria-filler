@@ -35,6 +35,20 @@ describe('fillCriteria', function() {
     expect((<any> query)._wheres[0].value).to.equal('a')
   })
 
+  it('should not add a sophisticated column citerium if the value is undefined', function() {
+    let criteria = {
+      a: {
+        operator: '<>',
+        value: undefined
+      }
+    }
+
+    let query = new Query
+    fillCriteria(query, criteria, ['a'])
+    
+    expect((<any> query)._wheres.length).to.equal(0)
+  })
+
   it('should add a null criterium', function() {
     let criteria1 = {
       a: null

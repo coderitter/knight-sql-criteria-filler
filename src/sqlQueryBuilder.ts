@@ -17,8 +17,8 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, colum
           if (value === null) {
             query.where(prop, value)
           }
-          else if (typeof value === 'object' && 'operator' in value && 'value' in value) {
-            query.where(prop, value.operator, value.value)
+          else if (value instanceof Array && value.length == 0) {
+            query.where(prop, value)
           }
           else if (value instanceof Array && value.length > 0) {
             // console.debug('Field is of type Array and has a length > 0')
@@ -72,6 +72,11 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, colum
                   query.where(prop, arrayValue)
                 }
               }
+            }
+          }
+          else if (typeof value === 'object') {
+            if (value.operator != undefined && value.value !== undefined) {
+              query.where(prop, value.operator, value.value)
             }
           }
           else {
