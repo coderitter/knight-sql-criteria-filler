@@ -186,8 +186,8 @@ describe('fillCriteria', function() {
     expect((<any> query)._wheres[1].value).to.equal(1)
   })
 
-  it('should regard properties beginning with an underscore and thus are private', function() {
-    let criteria = { _a: 'a', _b: 1 }
+  it('should regard property methods', function() {
+    let criteria = new TestPropertyMethods
 
     let query = new Query
     fillCriteria(query, criteria, ['a', 'b'])
@@ -208,4 +208,9 @@ class TestCriteria {
 
 class TestSubCriteria extends TestCriteria {
   b = 1
+}
+
+class TestPropertyMethods {
+  get a() { return 'a' }
+  get b() { return 1 }
 }

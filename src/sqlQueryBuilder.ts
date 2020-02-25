@@ -6,26 +6,26 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, colum
     return 
   }
 
-  for (let prop in criteria) {
-    if (Object.prototype.hasOwnProperty.call(criteria, prop)) {
-      let value = criteria[prop]
+  for (let column of columns) {
+    if (criteria[column] !== undefined) {
+      let value = criteria[column]
 
       // if the property name starts with an underscore we have a private property
       // in the database though the corresponding column will not start with _
       // thus we remove the underscrore
-      if (prop.indexOf('_') == 0) {
-        prop = prop.slice(1)
+      if (column.indexOf('_') == 0) {
+        column = column.slice(1)
       }
 
-      if (columns.indexOf(prop) > -1) {
+      if (columns.indexOf(column) > -1) {
         // console.debug(`Processing prop '${prop}':`, value)
 
         if (value !== undefined) {
           if (value === null) {
-            query.where(prop, value)
+            query.where(column, value)
           }
           else if (value instanceof Array && value.length == 0) {
-            query.where(prop, value)
+            query.where(column, value)
           }
           else if (value instanceof Array && value.length > 0) {
             // console.debug('Field is of type Array and has a length > 0')
@@ -67,27 +67,27 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, colum
 
             if (isInOperator) {
               // console.debug(`Array represents an SQL IN operation`)
-              query.where(prop, value)
+              query.where(column, value)
             }
             else {
               // console.debug(`Array represents AND connected conditions`)
               for (let arrayValue of value) {
                 if (isOurConditionObject(arrayValue)) {
-                  query.where(prop, arrayValue.operator, arrayValue.value)
+                  query.where(column, arrayValue.operator, arrayValue.value)
                 }
                 else {
-                  query.where(prop, arrayValue)
+                  query.where(column, arrayValue)
                 }
               }
             }
           }
           else if (typeof value === 'object') {
             if (value.operator != undefined && value.value !== undefined) {
-              query.where(prop, value.operator, value.value)
+              query.where(column, value.operator, value.value)
             }
           }
           else {
-            query.where(prop, value)
+            query.where(column, value)
           }
         }
       }
@@ -124,17 +124,10 @@ export function fillSqlInsertQuery(query: Query, parameter: DbCreateParameter|Db
     return 
   }
 
-  for (let column in parameter) {
-    if (Object.prototype.hasOwnProperty.call(parameter, column)) {
+  for (let column of columns) {
+    if (parameter[column] !== undefined) {
       let value = parameter[column]
-
-      if (column.indexOf('_') == 0) {
-        column = column.slice(1)
-      }
-
-      if (columns.indexOf(column) > -1) {  
-        query.value(column, value)
-      }
+      query.value(column, value)
     }
   }
 }
@@ -148,17 +141,10 @@ export function fillSqlUpdateQuery(query: Query, parameter: DbUpdateParameter|un
     return 
   }
 
-  for (let column in parameter) {
-    if (Object.prototype.hasOwnProperty.call(parameter, column)) {
+  for (let column of columns) {
+    if (parameter[column] !== undefined) {
       let value = parameter[column]
-
-      if (column.indexOf('_') == 0) {
-        column = column.slice(1)
-      }
-  
-      if (columns.indexOf(column) > -1) {
-        query.set(column, value)
-      }
+      query.set(column, value)
     }
   }
 
