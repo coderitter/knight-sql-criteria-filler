@@ -126,13 +126,13 @@ export function fillSqlInsertQuery(query: Query, parameter: DbCreateParameter|Db
 
   for (let column in parameter) {
     if (Object.prototype.hasOwnProperty.call(parameter, column)) {
-      if (columns.indexOf(column) > -1) {
-        let value = parameter[column]
+      let value = parameter[column]
 
-        if (column.indexOf('_') == 0) {
-          column = column.slice(1)
-        }
-  
+      if (column.indexOf('_') == 0) {
+        column = column.slice(1)
+      }
+
+      if (columns.indexOf(column) > -1) {  
         query.value(column, value)
       }
     }
@@ -150,13 +150,13 @@ export function fillSqlUpdateQuery(query: Query, parameter: DbUpdateParameter|un
 
   for (let column in parameter) {
     if (Object.prototype.hasOwnProperty.call(parameter, column)) {
+      let value = parameter[column]
+
+      if (column.indexOf('_') == 0) {
+        column = column.slice(1)
+      }
+  
       if (columns.indexOf(column) > -1) {
-        let value = parameter[column]
-
-        if (column.indexOf('_') == 0) {
-          column = column.slice(1)
-        }
-
         query.set(column, value)
       }
     }
