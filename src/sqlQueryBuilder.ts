@@ -8,9 +8,16 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, colum
 
   for (let prop in criteria) {
     if (Object.prototype.hasOwnProperty.call(criteria, prop)) {
-      if (columns.indexOf(prop) > -1) {
-        let value = criteria[prop]
+      let value = criteria[prop]
 
+      // if the property name starts with an underscore we have a private property
+      // in the database though the corresponding column will not start with _
+      // thus we remove the underscrore
+      if (prop.indexOf('_') == 0) {
+        prop = prop.slice(1)
+      }
+
+      if (columns.indexOf(prop) > -1) {
         // console.debug(`Processing prop '${prop}':`, value)
 
         if (value !== undefined) {
