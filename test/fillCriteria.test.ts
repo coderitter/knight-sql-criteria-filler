@@ -180,10 +180,10 @@ describe('fillCriteria', function() {
     expect((<any> query)._wheres.length).to.equal(2)
     expect((<any> query)._wheres[0].column).to.equal('a')
     expect((<any> query)._wheres[0].operator).to.equal('=')
-    expect((<any> query)._wheres[0].value).to.deep.equal('a')
+    expect((<any> query)._wheres[0].value).to.equal('a')
     expect((<any> query)._wheres[1].column).to.equal('b')
     expect((<any> query)._wheres[1].operator).to.equal('=')
-    expect((<any> query)._wheres[1].value).to.deep.equal(1)
+    expect((<any> query)._wheres[1].value).to.equal(1)
   })
 
   it('should regard properties beginning with an underscore and thus are private', function() {
@@ -195,10 +195,10 @@ describe('fillCriteria', function() {
     expect((<any> query)._wheres.length).to.equal(2)
     expect((<any> query)._wheres[0].column).to.equal('a')
     expect((<any> query)._wheres[0].operator).to.equal('=')
-    expect((<any> query)._wheres[0].value).to.deep.equal('a')
+    expect((<any> query)._wheres[0].value).to.equal('a')
     expect((<any> query)._wheres[1].column).to.equal('b')
     expect((<any> query)._wheres[1].operator).to.equal('=')
-    expect((<any> query)._wheres[1].value).to.deep.equal(1)
+    expect((<any> query)._wheres[1].value).to.equal(1)
   })
 })
 
