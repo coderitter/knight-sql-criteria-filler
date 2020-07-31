@@ -37,7 +37,7 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, colum
 
             for (let arrayValue of value) {
               let typeOfArrayValue = typeof arrayValue
-              let instanceOfArrayValue = arrayValue.constructor != undefined ? arrayValue.constructor.name : undefined
+              let instanceOfArrayValue = arrayValue != undefined && arrayValue.constructor != undefined ? arrayValue.constructor.name : undefined
 
               if (firstArrayValue) {
                 lastTypeOfArrayValue = typeOfArrayValue

@@ -11,11 +11,12 @@ describe('fillCriteria', function() {
 
     let query = new Query
     fillCriteria(query, criteria, ['a'])
-    
+    console.log((<any> query)._wheres[0])
     expect((<any> query)._wheres.length).to.equal(1)
-    expect((<any> query)._wheres[0].column).to.equal('a')
-    expect((<any> query)._wheres[0].operator).to.equal('=')
-    expect((<any> query)._wheres[0].value).to.equal('a')
+    expect((<any> query)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query)._wheres[0].predicate.operator).to.equal('=')
+    expect((<any> query)._wheres[0].predicate.value).to.equal('a')
   })
 
   it('should add a sophisticated column citerium', function() {
@@ -30,9 +31,10 @@ describe('fillCriteria', function() {
     fillCriteria(query, criteria, ['a'])
     
     expect((<any> query)._wheres.length).to.equal(1)
-    expect((<any> query)._wheres[0].column).to.equal('a')
-    expect((<any> query)._wheres[0].operator).to.equal('<>')
-    expect((<any> query)._wheres[0].value).to.equal('a')
+    expect((<any> query)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query)._wheres[0].predicate.operator).to.equal('<>')
+    expect((<any> query)._wheres[0].predicate.value).to.equal('a')
   })
 
   it('should not add a sophisticated column citerium if the value is undefined', function() {
@@ -58,9 +60,10 @@ describe('fillCriteria', function() {
     fillCriteria(query1, criteria1, ['a'])
     
     expect((<any> query1)._wheres.length).to.equal(1)
-    expect((<any> query1)._wheres[0].column).to.equal('a')
-    expect((<any> query1)._wheres[0].operator).to.equal('IS')
-    expect((<any> query1)._wheres[0].value).to.equal('NULL')
+    expect((<any> query1)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query1)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query1)._wheres[0].predicate.operator).to.equal('IS')
+    expect((<any> query1)._wheres[0].predicate.value).to.equal('NULL')
 
     let criteria2 = {
       a: 'IS NULL'
@@ -70,9 +73,10 @@ describe('fillCriteria', function() {
     fillCriteria(query2, criteria2, ['a'])
     
     expect((<any> query2)._wheres.length).to.equal(1)
-    expect((<any> query2)._wheres[0].column).to.equal('a')
-    expect((<any> query2)._wheres[0].operator).to.equal('IS')
-    expect((<any> query2)._wheres[0].value).to.equal('NULL')
+    expect((<any> query2)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query2)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query2)._wheres[0].predicate.operator).to.equal('IS')
+    expect((<any> query2)._wheres[0].predicate.value).to.equal('NULL')
 
     let criteria3 = {
       a: {
@@ -85,9 +89,10 @@ describe('fillCriteria', function() {
     fillCriteria(query3, criteria3, ['a'])
     
     expect((<any> query3)._wheres.length).to.equal(1)
-    expect((<any> query3)._wheres[0].column).to.equal('a')
-    expect((<any> query3)._wheres[0].operator).to.equal('IS')
-    expect((<any> query3)._wheres[0].value).to.equal('NULL')
+    expect((<any> query3)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query3)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query3)._wheres[0].predicate.operator).to.equal('IS')
+    expect((<any> query3)._wheres[0].predicate.value).to.equal('NULL')
   })
 
   it('should create an IN operator of an array of values', function() {
@@ -99,9 +104,10 @@ describe('fillCriteria', function() {
     fillCriteria(query1, criteria1, ['a'])
     
     expect((<any> query1)._wheres.length).to.equal(1)
-    expect((<any> query1)._wheres[0].column).to.equal('a')
-    expect((<any> query1)._wheres[0].operator).to.equal('IN')
-    expect((<any> query1)._wheres[0].value).to.deep.equal([1, 2, 3, 4])
+    expect((<any> query1)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query1)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query1)._wheres[0].predicate.operator).to.equal('IN')
+    expect((<any> query1)._wheres[0].predicate.value).to.deep.equal([1, 2, 3, 4])
 
     let criteria2 = {
       a: ['a', 'b', 'c', 'd']
@@ -111,9 +117,10 @@ describe('fillCriteria', function() {
     fillCriteria(query2, criteria2, ['a'])
     
     expect((<any> query2)._wheres.length).to.equal(1)
-    expect((<any> query2)._wheres[0].column).to.equal('a')
-    expect((<any> query2)._wheres[0].operator).to.equal('IN')
-    expect((<any> query2)._wheres[0].value).to.deep.equal(['a', 'b', 'c', 'd'])
+    expect((<any> query2)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query2)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query2)._wheres[0].predicate.operator).to.equal('IN')
+    expect((<any> query2)._wheres[0].predicate.value).to.deep.equal(['a', 'b', 'c', 'd'])
 
     let date1 = new Date
     let date2 = new Date
@@ -126,9 +133,10 @@ describe('fillCriteria', function() {
     fillCriteria(query3, criteria3, ['a'])
     
     expect((<any> query3)._wheres.length).to.equal(1)
-    expect((<any> query3)._wheres[0].column).to.equal('a')
-    expect((<any> query3)._wheres[0].operator).to.equal('IN')
-    expect((<any> query3)._wheres[0].value).to.deep.equal([date1, date2])
+    expect((<any> query3)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query3)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query3)._wheres[0].predicate.operator).to.equal('IN')
+    expect((<any> query3)._wheres[0].predicate.value).to.deep.equal([date1, date2])
   })
 
   it('should accept an array if sophisticated column criteria', function() {
@@ -149,12 +157,14 @@ describe('fillCriteria', function() {
     fillCriteria(query, criteria, ['a'])
     
     expect((<any> query)._wheres.length).to.equal(2)
-    expect((<any> query)._wheres[0].column).to.equal('a')
-    expect((<any> query)._wheres[0].operator).to.equal('>')
-    expect((<any> query)._wheres[0].value).to.equal(1)
-    expect((<any> query)._wheres[1].column).to.equal('a')
-    expect((<any> query)._wheres[1].operator).to.equal('<')
-    expect((<any> query)._wheres[1].value).to.equal(10)
+    expect((<any> query)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query)._wheres[0].predicate.operator).to.equal('>')
+    expect((<any> query)._wheres[0].predicate.value).to.equal(1)
+    expect((<any> query)._wheres[1].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[1].predicate.column).to.equal('a')
+    expect((<any> query)._wheres[1].predicate.operator).to.equal('<')
+    expect((<any> query)._wheres[1].predicate.value).to.equal(10)
   })
 
   it('should set an empty array as value as an IN operator on an empty array', function() {
@@ -166,9 +176,10 @@ describe('fillCriteria', function() {
     fillCriteria(query, criteria, ['a'])
 
     expect((<any> query)._wheres.length).to.equal(1)
-    expect((<any> query)._wheres[0].column).to.equal('a')
-    expect((<any> query)._wheres[0].operator).to.equal('IN')
-    expect((<any> query)._wheres[0].value).to.deep.equal([])
+    expect((<any> query)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query)._wheres[0].predicate.operator).to.equal('IN')
+    expect((<any> query)._wheres[0].predicate.value).to.deep.equal([])
   })
 
   it('should regard inherited properties', function() {
@@ -178,12 +189,14 @@ describe('fillCriteria', function() {
     fillCriteria(query, criteria, ['a', 'b'])
 
     expect((<any> query)._wheres.length).to.equal(2)
-    expect((<any> query)._wheres[0].column).to.equal('a')
-    expect((<any> query)._wheres[0].operator).to.equal('=')
-    expect((<any> query)._wheres[0].value).to.equal('a')
-    expect((<any> query)._wheres[1].column).to.equal('b')
-    expect((<any> query)._wheres[1].operator).to.equal('=')
-    expect((<any> query)._wheres[1].value).to.equal(1)
+    expect((<any> query)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query)._wheres[0].predicate.operator).to.equal('=')
+    expect((<any> query)._wheres[0].predicate.value).to.equal('a')
+    expect((<any> query)._wheres[1].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[1].predicate.column).to.equal('b')
+    expect((<any> query)._wheres[1].predicate.operator).to.equal('=')
+    expect((<any> query)._wheres[1].predicate.value).to.equal(1)
   })
 
   it('should regard property methods', function() {
@@ -193,12 +206,14 @@ describe('fillCriteria', function() {
     fillCriteria(query, criteria, ['a', 'b'])
 
     expect((<any> query)._wheres.length).to.equal(2)
-    expect((<any> query)._wheres[0].column).to.equal('a')
-    expect((<any> query)._wheres[0].operator).to.equal('=')
-    expect((<any> query)._wheres[0].value).to.equal('a')
-    expect((<any> query)._wheres[1].column).to.equal('b')
-    expect((<any> query)._wheres[1].operator).to.equal('=')
-    expect((<any> query)._wheres[1].value).to.equal(1)
+    expect((<any> query)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query)._wheres[0].predicate.operator).to.equal('=')
+    expect((<any> query)._wheres[0].predicate.value).to.equal('a')
+    expect((<any> query)._wheres[1].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[1].predicate.column).to.equal('b')
+    expect((<any> query)._wheres[1].predicate.operator).to.equal('=')
+    expect((<any> query)._wheres[1].predicate.value).to.equal(1)
   })
 })
 

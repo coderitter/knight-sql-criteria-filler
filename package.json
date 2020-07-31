@@ -1,6 +1,6 @@
 {
   "name": "mega-nice-sql-query-builder",
-  "version": "3.3.9",
+  "version": "3.3.10",
   "description": "A mega nice SQL query builder which works with mega nice SQL query options",
   "main": "lib/sqlQueryBuilder.js",
   "types": "lib/sqlQueryBuilder.d.ts",
@@ -9,15 +9,15 @@
   ],
   "dependencies": {
     "mega-nice-db-query-parameter": "^1.0.2",
-    "mega-nice-sql": "^1.4.0"
+    "mega-nice-sql": "^1.6.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.9",
-    "@types/mocha": "^7.0.1",
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^7.0.2",
     "chai": "^4.2.0",
-    "mocha": "^7.1.0",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.8.2"
+    "mocha": "^7.2.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "test": "mocha -r ts-node/register \"test/**/*.test.ts\"",
