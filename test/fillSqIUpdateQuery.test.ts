@@ -5,8 +5,9 @@ import { fillSqlUpdateQuery } from '../src/sqlQueryBuilder'
 
 describe('fillSqlUpdateQuery', function() {
   it('should add simple properties', function() {
-    let parameter = { a: 'a', b: 1 }
+    let parameter = { set: { a: 'a', b: 1 }}
     let query = new Query
+
     fillSqlUpdateQuery(query, parameter, ['a', 'b'])
 
     expect((<any> query)._values.length).to.equal(2)
@@ -17,8 +18,9 @@ describe('fillSqlUpdateQuery', function() {
   })
 
   it('should add values from property methods', function() {
-    let parameter = new TestPropertyMethods
+    let parameter = { set: new TestPropertyMethods }
     let query = new Query
+    
     fillSqlUpdateQuery(query, parameter, ['a', 'b'])
 
     expect((<any> query)._values.length).to.equal(2)

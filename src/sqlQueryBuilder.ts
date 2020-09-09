@@ -1,4 +1,4 @@
-import { DbCreateParameter, DbCriteria, DbDeleteParameter, DbInsertParameter, DbReadParameter, DbSelectParameter, DbUpdateParameter } from 'mega-nice-db-query-parameter'
+import { DbCreateCriteria, DbCriteria, DbDeleteCriteria, DbInsertCriteria, DbReadCriteria, DbSelectCriteria, DbUpdateCriteria } from 'mega-nice-db-criteria'
 import { Query } from 'mega-nice-sql'
 
 export function fillCriteria(query: Query, criteria: DbCriteria|undefined, columns: string[]) {
@@ -119,40 +119,46 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, colum
   }
 }
 
-export function fillSqlInsertQuery(query: Query, parameter: DbCreateParameter|DbInsertParameter|undefined, columns: string[]) {
-  if (parameter == undefined) {
+export function fillSqlInsertQuery(query: Query, criteria: DbCreateCriteria|DbInsertCriteria|undefined, columns: string[]) {
+  if (criteria == undefined) {
     return 
   }
 
   for (let column of columns) {
-    if (parameter[column] !== undefined) {
-      let value = parameter[column]
+    if (criteria[column] !== undefined) {
+      let value = criteria[column]
       query.value(column, value)
     }
   }
 }
 
-export function fillSqlSelectQuery(query: Query, parameter: DbReadParameter|DbSelectParameter|undefined, columns: string[]) {
-  fillCriteria(query, parameter, columns)
+export function fillSqlSelectQuery(query: Query, criteria: DbReadCriteria|DbSelectCriteria|undefined, columns: string[]) {
+  fillCriteria(query, criteria, columns)
 }
 
-export function fillSqlUpdateQuery(query: Query, parameter: DbUpdateParameter|undefined, columns: string[]) {
-  if (parameter == undefined) {
+export function fillSqlUpdateQuery(query: Query, criteria: DbUpdateCriteria|undefined, columns: string[]) {
+  if (criteria == undefined || criteria.set == undefined) {
     return 
   }
 
   for (let column of columns) {
-    if (parameter[column] !== undefined) {
-      let value = parameter[column]
+    if (criteria.set[column] !== undefined) {
+      let value = criteria.set[column]
       query.set(column, value)
     }
   }
 
-  fillCriteria(query, parameter.criteria, columns)
+  let clone = {
+    ...criteria
+  }
+
+  delete clone.set
+
+  fillCriteria(query, clone, columns)
 }
 
-export function fillSqlDeleteQuery(query: Query, parameter: DbDeleteParameter|undefined, columns: string[]) {
-  return fillCriteria(query, parameter, columns)
+export function fillSqlDeleteQuery(query: Query, criteria: DbDeleteCriteria|undefined, columns: string[]) {
+  return fillCriteria(query, criteria, columns)
 }
 
 function isOurConditionObject(value: any): boolean {
