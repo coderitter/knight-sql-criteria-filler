@@ -158,7 +158,7 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, table
     // console.debug('otherTable', otherTable)
     // console.debug('otherId', otherId)
 
-    let joinAlias = alias != undefined && alias.length > 0 ? alias + '_' + relationshipName : relationshipName
+    let joinAlias = alias != undefined && alias.length > 0 ? alias + '__' + relationshipName : relationshipName
 
     // console.debug('joinAlias', joinAlias)
     
@@ -239,7 +239,7 @@ export function buildSqlSelectQuery(criteria: DbReadCriteria|DbSelectCriteria|un
 
     for (let column of fromTable.columns) {
       let alias = from.alias != undefined && from.alias.length > 0 ? from.alias : undefined
-      query.select((alias != undefined ? alias + '.' : '' ) + column, (alias != undefined ? alias + '_' + column : undefined))
+      query.select((alias != undefined ? alias + '.' : '' ) + column, (alias != undefined ? alias + '__' + column : undefined))
     }
   }
 
@@ -252,7 +252,7 @@ export function buildSqlSelectQuery(criteria: DbReadCriteria|DbSelectCriteria|un
 
     for (let column of joinTable.columns) {
       let alias = join.alias != undefined && join.alias.length > 0 ? join.alias : undefined
-      query.select((alias != undefined ? alias + '.' : '' ) + column, (alias != undefined ? alias + '_' + column : undefined))
+      query.select((alias != undefined ? alias + '.' : '' ) + column, (alias != undefined ? alias + '__' + column : undefined))
     }
   }
 
