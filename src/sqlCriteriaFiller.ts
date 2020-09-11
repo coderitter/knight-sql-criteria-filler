@@ -97,7 +97,7 @@ export function fillCriteria(query: Query, criteria: Criteria|undefined, columns
   }
 }
 
-export function fillSqlInsertQuery(query: Query, criteria: CreateCriteria|undefined, columns: string[]) {
+export function fillCreateCriteria(query: Query, criteria: CreateCriteria|undefined, columns: string[]) {
   if (criteria == undefined) {
     return 
   }
@@ -112,7 +112,7 @@ export function fillSqlInsertQuery(query: Query, criteria: CreateCriteria|undefi
   return query
 }
 
-export function fillSqlSelectQuery(query: Query, criteria: ReadCriteria|undefined, columns: string[]) {
+export function fillReadCriteria(query: Query, criteria: ReadCriteria|undefined, columns: string[]) {
   if (criteria == undefined) {
     return
   }
@@ -144,7 +144,7 @@ export function fillSqlSelectQuery(query: Query, criteria: ReadCriteria|undefine
   }
 }
 
-export function fillSqlUpdateQuery(query: Query, criteria: UpdateCriteria|undefined, columns: string[]) {
+export function fillUpdateCriteria(query: Query, criteria: UpdateCriteria|undefined, columns: string[]) {
   if (criteria == undefined) {
     return
   }
@@ -167,7 +167,7 @@ export function fillSqlUpdateQuery(query: Query, criteria: UpdateCriteria|undefi
   return query
 }
 
-export function fillSqlDeleteQuery(query: Query, criteria: DeleteCriteria|undefined, columns: string[]) {
+export function fillDeleteCriteria(query: Query, criteria: DeleteCriteria|undefined, columns: string[]) {
   if (criteria == undefined) {
     return
   }

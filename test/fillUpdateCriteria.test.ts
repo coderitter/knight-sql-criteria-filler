@@ -1,13 +1,13 @@
 import { expect } from 'chai'
 import sql from 'mega-nice-sql'
 import 'mocha'
-import { fillSqlInsertQuery } from '../src/sqlCriteriaFiller'
+import { fillUpdateCriteria } from '../src/sqlCriteriaFiller'
 
-describe('fillSqlInsertQuery', function() {
+describe('buildSqlUpdateQuery', function() {
   it('should add simple properties', function() {
-    let criteria = { a: 'a', b: 1 }
-    let query = sql.insertInto('Table')
-    fillSqlInsertQuery(query, criteria, [ 'a', 'b' ])
+    let criteria = { set: { a: 'a', b: 1 }}
+    let query = sql.update('Table')
+    fillUpdateCriteria(query, criteria, ['a', 'b'])
 
     expect((<any> query)._values.length).to.equal(2)
     expect((<any> query)._values[0].column).to.equal('a')
@@ -17,9 +17,9 @@ describe('fillSqlInsertQuery', function() {
   })
 
   it('should add values from property methods', function() {
-    let parameter = new TestPropertyMethods
-    let query = sql.insertInto('Table')
-    fillSqlInsertQuery(query, parameter, [ 'a', 'b' ])
+    let criteria = { set: new TestPropertyMethods }
+    let query = sql.update('Table')
+    fillUpdateCriteria(query, criteria, ['a', 'b'])
 
     expect((<any> query)._values.length).to.equal(2)
     expect((<any> query)._values[0].column).to.equal('a')
