@@ -1,6 +1,6 @@
 {
   "name": "mega-nice-sql-criteria-filler",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "A mega nice SQL query criteria filler.",
   "main": "lib/sqlQueryBuilder.js",
   "types": "lib/sqlQueryBuilder.d.ts",
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "test": "mocha -r ts-node/register \"test/**/*.test.ts\"",
-    "build": "tsc"
+    "build": "rm -rf lib && tsc"
   },
   "repository": {
     "type": "git",
