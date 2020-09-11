@@ -13,7 +13,7 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, table
     return 
   }
 
-  let table = schema.table(tableName)
+  let table = schema[tableName]
   // console.debug('table', table)
 
   if (table == undefined) {
@@ -197,7 +197,7 @@ export function fillCriteria(query: Query, criteria: DbCriteria|undefined, table
 }
 
 export function buildSqlInsertQuery(criteria: DbCreateCriteria|DbInsertCriteria|undefined, tableName: string, schema: Schema): Query {
-  let table = schema.table(tableName)
+  let table = schema[tableName]
 
   if (table == undefined) {
     throw new Error('Table not contained in schema: ' + tableName)
@@ -220,7 +220,7 @@ export function buildSqlInsertQuery(criteria: DbCreateCriteria|DbInsertCriteria|
 }
 
 export function buildSqlSelectQuery(criteria: DbReadCriteria|DbSelectCriteria|undefined, tableName: string, schema: Schema): Query {
-  let table = schema.table(tableName)
+  let table = schema[tableName]
 
   if (table == undefined) {
     throw new Error('Table not contained in schema: ' + tableName)
@@ -231,7 +231,7 @@ export function buildSqlSelectQuery(criteria: DbReadCriteria|DbSelectCriteria|un
   fillCriteria(query, criteria, tableName, schema)
 
   for (let from of query._froms) {
-    let fromTable = schema.table(from.table)
+    let fromTable = schema[from.table]
     
     if (fromTable == undefined) {
       throw new Error('Table not contained in schema: ' + from.table)
@@ -244,7 +244,7 @@ export function buildSqlSelectQuery(criteria: DbReadCriteria|DbSelectCriteria|un
   }
 
   for (let join of query._joins) {
-    let joinTable = schema.table(join.table)
+    let joinTable = schema[join.table]
     
     if (joinTable == undefined) {
       throw new Error('Table not contained in schema: ' + join.table)
@@ -260,7 +260,7 @@ export function buildSqlSelectQuery(criteria: DbReadCriteria|DbSelectCriteria|un
 }
 
 export function buildSqlUpdateQuery(criteria: DbUpdateCriteria|undefined, tableName: string, schema: Schema): Query {
-  let table = schema.table(tableName)
+  let table = schema[tableName]
 
   if (table == undefined) {
     throw new Error('Table not contained in schema: ' + tableName)
@@ -291,7 +291,7 @@ export function buildSqlUpdateQuery(criteria: DbUpdateCriteria|undefined, tableN
 }
 
 export function buildSqlDeleteQuery(criteria: DbDeleteCriteria|undefined, tableName: string, schema: Schema): Query {
-  let table = schema.table(tableName)
+  let table = schema[tableName]
 
   if (table == undefined) {
     throw new Error('Table not contained in schema: ' + tableName)
@@ -308,22 +308,12 @@ export function buildSqlDeleteQuery(criteria: DbDeleteCriteria|undefined, tableN
   return query
 }
 
-export class Schema {
-  tableNameToTable: {[ tableName: string]: Table } = {}
-
-  add(...tables: Table[]) {
-    for (let table of tables) {
-      this.tableNameToTable[table.table] = table
-    }
-  }
-
-  table(tableName: string) {
-    return this.tableNameToTable[tableName]
-  }
+export interface Schema {
+  [ tableName: string]: Table
 }
 
 export interface Table {
-  table: string
+  name: string
   columns: string[]
   [ relationship: string ]: any|Relationship
 }

@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import 'mocha'
-import { buildSqlSelectQuery, Schema } from '../src/sqlQueryBuilder'
+import { buildSqlSelectQuery } from '../src/sqlQueryBuilder'
 
 describe('buildSqlSelectQuery', function() {
   it('should handle a simple select query', function() {
@@ -36,15 +36,14 @@ describe('buildSqlSelectQuery', function() {
   })
 })
 
-const schema = new Schema
-
-schema.add(
-  {
-    table: 'TableAB',
+const schema = {
+  'TableAB': {
+    name: 'TableAB',
     columns: [ 'a', 'b' ]
   },
-  {
-    table: 'Table1',
+  
+  'Table1': {
+    name: 'Table1',
     columns: [ 'id', 'column1' ],
     many: {
       oneToMany: {
@@ -54,8 +53,9 @@ schema.add(
       }
     }
   },
-  {
-    table: 'Table2',
+  
+  'Table2': {
+    name: 'Table2',
     columns: [ 'id', 'column1' ],
     many: {
       oneToMany: {
@@ -65,8 +65,9 @@ schema.add(
       }
     }
   },
-  {
-    table: 'TableMany',
+
+  'TableMany': {
+    name: 'TableMany',
     columns: [ 'table1Id', 'table2Id', 'column1' ],
     table1: {
       manyToOne: {
@@ -83,4 +84,4 @@ schema.add(
       }
     }
   }
-)
+}

@@ -223,14 +223,14 @@ class TestPropertyMethods {
   get b() { return 1 }
 }
 
-const schema = new Schema
-schema.add(
-  {
-    table: 'TableA',
+const schema = {
+  'TableA': {
+    name: 'TableA',
     columns: [ 'a' ]
   },
-  {
-    table: 'TableAB',
+  
+  'TableAB': {
+    name: 'TableAB',
     columns: [ 'a', 'b' ]
   }
-)
+} as Schema
