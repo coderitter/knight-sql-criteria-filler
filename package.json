@@ -1,9 +1,9 @@
 {
   "name": "mega-nice-sql-criteria-filler",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "A mega nice SQL query criteria filler.",
-  "main": "lib/sqlQueryBuilder.js",
-  "types": "lib/sqlQueryBuilder.d.ts",
+  "main": "lib/sqlCriteriaFiller.js",
+  "types": "lib/sqlCriteriaFiller.d.ts",
   "files": [
     "lib/**/*"
   ],
