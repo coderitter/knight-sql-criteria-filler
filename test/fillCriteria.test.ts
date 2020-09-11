@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { Query } from 'mega-nice-sql'
 import 'mocha'
-import { fillCriteria, Schema } from '../src/sqlQueryBuilder'
+import { fillCriteria } from '../src/sqlCriteriaFiller'
 
 describe('fillCriteria', function() {
   it('should add a simple column citerium', function() {
@@ -10,7 +10,7 @@ describe('fillCriteria', function() {
     }
 
     let query = new Query
-    fillCriteria(query, criteria, 'TableA', schema)
+    fillCriteria(query, criteria, ['a'])
 
     expect((<any> query)._wheres.length).to.equal(1)
     expect((<any> query)._wheres[0].predicate).to.be.not.undefined
@@ -28,7 +28,7 @@ describe('fillCriteria', function() {
     }
 
     let query = new Query
-    fillCriteria(query, criteria, 'TableA', schema)
+    fillCriteria(query, criteria, ['a'])
     
     expect((<any> query)._wheres.length).to.equal(1)
     expect((<any> query)._wheres[0].predicate).to.be.not.undefined
@@ -46,7 +46,7 @@ describe('fillCriteria', function() {
     }
 
     let query = new Query
-    fillCriteria(query, criteria, 'TableA', schema)
+    fillCriteria(query, criteria, ['a'])
     
     expect((<any> query)._wheres.length).to.equal(0)
   })
@@ -57,7 +57,7 @@ describe('fillCriteria', function() {
     }
 
     let query1 = new Query
-    fillCriteria(query1, criteria1, 'TableA', schema)
+    fillCriteria(query1, criteria1, ['a'])
 
     expect((<any> query1)._wheres.length).to.equal(1)
     expect((<any> query1)._wheres[0].predicate).to.be.not.undefined
@@ -69,7 +69,7 @@ describe('fillCriteria', function() {
     }
 
     let query2 = new Query
-    fillCriteria(query2, criteria2, 'TableA', schema)
+    fillCriteria(query2, criteria2, ['a'])
     
     expect((<any> query2)._wheres.length).to.equal(1)
     expect((<any> query2)._wheres[0].predicate).to.be.not.undefined
@@ -84,7 +84,7 @@ describe('fillCriteria', function() {
     }
 
     let query3 = new Query
-    fillCriteria(query3, criteria3, 'TableA', schema)
+    fillCriteria(query3, criteria3, ['a'])
     
     expect((<any> query3)._wheres.length).to.equal(1)
     expect((<any> query3)._wheres[0].predicate).to.be.not.undefined
@@ -98,7 +98,7 @@ describe('fillCriteria', function() {
     }
 
     let query1 = new Query
-    fillCriteria(query1, criteria1, 'TableA', schema)
+    fillCriteria(query1, criteria1, ['a'])
     
     expect((<any> query1)._wheres.length).to.equal(1)
     expect((<any> query1)._wheres[0].predicate).to.be.not.undefined
@@ -110,7 +110,7 @@ describe('fillCriteria', function() {
     }
 
     let query2 = new Query
-    fillCriteria(query2, criteria2, 'TableA', schema)
+    fillCriteria(query2, criteria2, ['a'])
     
     expect((<any> query2)._wheres.length).to.equal(1)
     expect((<any> query2)._wheres[0].predicate).to.be.not.undefined
@@ -125,7 +125,7 @@ describe('fillCriteria', function() {
     }
 
     let query3 = new Query
-    fillCriteria(query3, criteria3, 'TableA', schema)
+    fillCriteria(query3, criteria3, ['a'])
     
     expect((<any> query3)._wheres.length).to.equal(1)
     expect((<any> query3)._wheres[0].predicate).to.be.not.undefined
@@ -148,7 +148,7 @@ describe('fillCriteria', function() {
     }
 
     let query = new Query
-    fillCriteria(query, criteria, 'TableA', schema)
+    fillCriteria(query, criteria, ['a'])
     
     expect((<any> query)._wheres.length).to.equal(2)
     expect((<any> query)._wheres[0].predicate).to.be.not.undefined
@@ -167,7 +167,7 @@ describe('fillCriteria', function() {
     }
 
     let query = new Query
-    fillCriteria(query, criteria, 'TableA', schema)
+    fillCriteria(query, criteria, ['a'])
 
     expect((<any> query)._wheres.length).to.equal(1)
     expect((<any> query)._wheres[0].predicate).to.be.not.undefined
@@ -179,7 +179,7 @@ describe('fillCriteria', function() {
     let criteria = new TestSubCriteria
 
     let query = new Query
-    fillCriteria(query, criteria, 'TableAB', schema)
+    fillCriteria(query, criteria, ['a', 'b'])
 
     expect((<any> query)._wheres.length).to.equal(2)
     expect((<any> query)._wheres[0].predicate).to.be.not.undefined
@@ -196,7 +196,7 @@ describe('fillCriteria', function() {
     let criteria = new TestPropertyMethods
 
     let query = new Query
-    fillCriteria(query, criteria, 'TableAB', schema)
+    fillCriteria(query, criteria, ['a', 'b'])
 
     expect((<any> query)._wheres.length).to.equal(2)
     expect((<any> query)._wheres[0].predicate).to.be.not.undefined
@@ -222,15 +222,3 @@ class TestPropertyMethods {
   get a() { return 'a' }
   get b() { return 1 }
 }
-
-const schema = {
-  'TableA': {
-    name: 'TableA',
-    columns: [ 'a' ]
-  },
-  
-  'TableAB': {
-    name: 'TableAB',
-    columns: [ 'a', 'b' ]
-  }
-} as Schema

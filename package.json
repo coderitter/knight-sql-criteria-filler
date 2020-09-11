@@ -1,14 +1,14 @@
 {
-  "name": "mega-nice-sql-query-builder",
-  "version": "4.0.2",
-  "description": "A mega nice SQL query builder which works with mega nice SQL query options",
+  "name": "mega-nice-sql-criteria-filler",
+  "version": "4.0.0",
+  "description": "A mega nice SQL query criteria filler.",
   "main": "lib/sqlQueryBuilder.js",
   "types": "lib/sqlQueryBuilder.d.ts",
   "files": [
     "lib/**/*"
   ],
   "dependencies": {
-    "mega-nice-db-criteria": "^2.1.0",
+    "mega-nice-criteria": "^3.0.0",
     "mega-nice-sql": "^2.2.0"
   },
   "devDependencies": {
@@ -25,14 +25,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/c0deritter/mega-nice-sql-query-builder.git"
+    "url": "git+https://github.com/c0deritter/mega-nice-sql-criteria-filler.git"
   },
   "keywords": [
     ""
   ],
   "author": "Coderitter GmbH",
   "bugs": {
-    "url": "https://github.com/c0deritter/mega-nice-sql-query-builder/issues"
+    "url": "https://github.com/c0deritter/mega-nice-sql-criteria-filler/issues"
   },
-  "homepage": "https://github.com/c0deritter/mega-nice-sql-query-builder#readme"
+  "homepage": "https://github.com/c0deritter/mega-nice-sql-criteria-filler#readme"
 }

@@ -1,11 +1,13 @@
 import { expect } from 'chai'
+import sql from 'mega-nice-sql'
 import 'mocha'
-import { buildSqlInsertQuery, Schema } from '../src/sqlQueryBuilder'
+import { fillSqlInsertQuery } from '../src/sqlCriteriaFiller'
 
-describe('buildSqlInsertQuery', function() {
+describe('fillSqlInsertQuery', function() {
   it('should add simple properties', function() {
     let criteria = { a: 'a', b: 1 }
-    let query = buildSqlInsertQuery(criteria, 'TableAB', schema)
+    let query = sql.insertInto('Table')
+    fillSqlInsertQuery(query, criteria, [ 'a', 'b' ])
 
     expect((<any> query)._values.length).to.equal(2)
     expect((<any> query)._values[0].column).to.equal('a')
@@ -16,7 +18,8 @@ describe('buildSqlInsertQuery', function() {
 
   it('should add values from property methods', function() {
     let parameter = new TestPropertyMethods
-    let query = buildSqlInsertQuery(parameter, 'TableAB', schema)
+    let query = sql.insertInto('Table')
+    fillSqlInsertQuery(query, parameter, [ 'a', 'b' ])
 
     expect((<any> query)._values.length).to.equal(2)
     expect((<any> query)._values[0].column).to.equal('a')
@@ -30,10 +33,3 @@ class TestPropertyMethods {
   get a() { return 'a' }
   get b() { return 1 }
 }
-
-const schema = {
-  'TableAB': {
-    name: 'TableAB',
-    columns: [ 'a', 'b' ]
-  }
-} as Schema

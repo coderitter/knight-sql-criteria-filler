@@ -1,85 +1,82 @@
-# Mega Nice SQL Query Builder
+# Mega Nice SQL Criteria Filler
 
 ## Install
 
-`npm install mega-nice-sql-query-builder`
+`npm install mega-nice-sql-criteria-filler`
 
-This package uses [mega-nice-sql](https://github.com/c0deritter/mega-nice-sql) and [mega-nice-db-query-options](https://github.com/c0deritter/mega-nice-db-query-options).
+This package uses [mega-nice-sql](https://github.com/c0deritter/mega-nice-sql) and [mega-nice-criteria](https://github.com/c0deritter/mega-nice-criteria).
 
 ## Overview
+
+Every fill function takes an array of column names to ignore invalid or protected criteria fields.
 
 ### fillSqlInsertQuery()
 
 ```typescript
 import sql from 'mega-nice-sql'
-import { fillSqlInsertQuery } from 'mega-nice-sql-query-builder'
-import { SqlInsertOptions } from 'mega-nice-sql-query-options'
+import { CreateCriteria } from 'mega-nice-criteria'
+import { fillSqlInsertQuery } from 'mega-nice-sql-criteria-filler'
 
-let options: SqlInsertOptions = {
+let options: CreateCriteria = {
   name: 'Matthias',
   age: 37
 }
 
+let columns = ['name', 'age']
 let query = sql.insertInto('table')
-fillSqlInsertQuery(query, options)
+
+fillSqlInsertQuery(query, options, columns)
 ```
 
 ### fillSqlSelectQuery()
 
 ```typescript
 import sql from 'mega-nice-sql'
-import { fillSqlSelectQuery } from 'mega-nice-sql-query-builder'
-import { SqlSelectOptions } from 'mega-nice-sql-query-options'
+import { ReadCriteria } from 'mega-nice-criteria'
+import { fillSqlSelectQuery } from 'mega-nice-sql-criteria-filler'
 
-let options: SqlSelectOptions = {
+let options: ReadCriteria = {
   name: { operator: 'LIKE', value: '%tth%' },
   age: { operator: '>', value: 30 }
 }
 
+let columns = ['name', 'age']
 let query = sql.select('*').from('table')
-fillSqlSelectQuery(query, options)
+
+fillSqlSelectQuery(query, options, columns)
 ```
 
 ### fillSqlUpdateQuery()
 
 ```typescript
 import sql from 'mega-nice-sql'
-import { fillSqlUpdateQuery } from 'mega-nice-sql-query-builder'
-import { SqlUpdateOptions } from 'mega-nice-sql-query-options'
+import { UpdateCriteria } from 'mega-nice-criteria'
+import { fillSqlUpdateQuery } from 'mega-nice-sql-criteria-filler'
 
-let options: SqlUpdateOptions = {
-  age: 33,
-  queryOptions: {
-    id: 1
+let options: UpdateCriteria = {
+  id: 1
+  set: {
+    age: 33,
   }
 }
 
+let columns = ['name', 'age']
 let query = sql.update('table')
-fillSqlUpdateQuery(query, options)
+
+fillSqlUpdateQuery(query, options, columns)
 ```
 
 ### fillSqlDeleteQuery()
 
 ```typescript
 import sql from 'mega-nice-sql'
-import { fillSqlDeleteQuery } from 'mega-nice-sql-query-builder'
-import { SqlDeleteOptions } from 'mega-nice-sql-query-options'
+import { DeleteCriteria } from 'mega-nice-criteria'
+import { fillSqlDeleteQuery } from 'mega-nice-sql-criteria-filler'
 
-let options: SqlDeleteOptions = {
+let options: DeleteCriteria = {
   id: 1
 }
 
 let query = sql.deleteFrom('table')
 fillSqlDeleteQuery(query, options)
-```
-
-### Determine allowed columns
-
-```typescript
-let allowedColumns = [ 'id', 'name', 'age' ]
-
-fillSqlInsertQuery(query, options, allowedColumns)
-fillSqlSelectQuery(query, options, allowedColumns)
-fillSqlUpdateQuery(query, options, allowedColumns)
-fillSqlDeleteQuery(query, options, allowedColumns)
 ```
