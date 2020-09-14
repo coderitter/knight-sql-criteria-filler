@@ -158,9 +158,9 @@ export function fillUpdateCriteria(query: Query, criteria: UpdateCriteria|undefi
 
   let criteriaWithoutSet = {
     ...criteria
-  }
+  } as any
 
-  delete criteria.set
+  delete criteriaWithoutSet.set
 
   fillCriteria(query, criteriaWithoutSet, columns)
 
