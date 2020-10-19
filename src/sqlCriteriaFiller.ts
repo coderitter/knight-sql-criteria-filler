@@ -119,15 +119,15 @@ export function fillReadCriteria(query: Query, criteria: ReadCriteria|undefined,
 
   fillCriteria(query, criteria, columns)
 
-  if (criteria.orderBy != undefined) {
-    if (typeof criteria.orderBy === 'string') {
-      query.orderBy(criteria.orderBy)
+  if (criteria['@orderBy'] != undefined) {
+    if (typeof criteria['@orderBy'] === 'string') {
+      query.orderBy(criteria['@orderBy'])
     }
-    else if (criteria.orderBy != undefined && 'field' in criteria.orderBy && 'direction' in criteria.orderBy) {
-      query.orderBy(criteria.orderBy.field, criteria.orderBy.direction as any)
+    else if (criteria['@orderBy'] != undefined && 'field' in criteria['@orderBy'] && 'direction' in criteria['@orderBy']) {
+      query.orderBy(criteria['@orderBy'].field, criteria['@orderBy'].direction as any)
     }
-    else if (criteria.orderBy instanceof Array) {
-      for (let orderBy of criteria.orderBy) {
+    else if (criteria['@orderBy'] instanceof Array) {
+      for (let orderBy of criteria['@orderBy']) {
         if (typeof orderBy === 'object' && 'field' in orderBy) {
           query.orderBy(orderBy.field, orderBy.direction as any)
         }
@@ -135,12 +135,12 @@ export function fillReadCriteria(query: Query, criteria: ReadCriteria|undefined,
     }
   }
 
-  if (criteria.limit != undefined) {
-    query.limit(criteria.limit)
+  if (criteria['@limit'] != undefined) {
+    query.limit(criteria['@limit'])
   }
 
-  if (criteria.offset != undefined) {
-    query.offset(criteria.offset)
+  if (criteria['@offset'] != undefined) {
+    query.offset(criteria['@offset'])
   }
 }
 
@@ -150,8 +150,8 @@ export function fillUpdateCriteria(query: Query, criteria: UpdateCriteria|undefi
   }
 
   for (let column of columns) {
-    if (criteria.set[column] !== undefined) {
-      let value = criteria.set[column]
+    if (criteria['@set'][column] !== undefined) {
+      let value = criteria['@set'][column]
       query.set(column, value)
     }
   }
@@ -160,7 +160,7 @@ export function fillUpdateCriteria(query: Query, criteria: UpdateCriteria|undefi
     ...criteria
   } as any
 
-  delete criteriaWithoutSet.set
+  delete criteriaWithoutSet['@set']
 
   fillCriteria(query, criteriaWithoutSet, columns)
 
