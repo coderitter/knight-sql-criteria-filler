@@ -5,7 +5,7 @@ import { fillUpdateCriteria } from '../src/sqlCriteriaFiller'
 
 describe('buildSqlUpdateQuery', function() {
   it('should add simple properties', function() {
-    let criteria = { set: { a: 'a', b: 1 }}
+    let criteria = { '@set': { a: 'a', b: 1 }}
     let query = sql.update('Table')
     fillUpdateCriteria(query, criteria, ['a', 'b'])
 
@@ -17,7 +17,7 @@ describe('buildSqlUpdateQuery', function() {
   })
 
   it('should add values from property methods', function() {
-    let criteria = { set: new TestPropertyMethods }
+    let criteria = { '@set': new TestPropertyMethods }
     let query = sql.update('Table')
     fillUpdateCriteria(query, criteria, ['a', 'b'])
 
