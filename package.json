@@ -1,6 +1,6 @@
 {
   "name": "mega-nice-sql-criteria-filler",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "A mega nice SQL query criteria filler",
   "main": "lib/sqlCriteriaFiller.js",
   "types": "lib/sqlCriteriaFiller.d.ts",
@@ -8,7 +8,7 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "mega-nice-criteria": "^5.1.0",
+    "mega-nice-criteria": "^5.2.0",
     "mega-nice-sql": "^2.2.0"
   },
   "devDependencies": {
