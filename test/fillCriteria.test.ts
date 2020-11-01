@@ -208,6 +208,20 @@ describe('fillCriteria', function() {
     expect((<any> query)._wheres[1].predicate.operator).to.equal('=')
     expect((<any> query)._wheres[1].predicate.value).to.equal(1)
   })
+
+  it('should add Date comparisons', function() {
+    let now = new Date
+    let criteria = { a: now }
+
+    let query = new Query
+    fillCriteria(query, criteria, ['a'])
+
+    expect((<any> query)._wheres.length).to.equal(1)
+    expect((<any> query)._wheres[0].predicate).to.be.not.undefined
+    expect((<any> query)._wheres[0].predicate.column).to.equal('a')
+    expect((<any> query)._wheres[0].predicate.operator).to.equal('=')
+    expect((<any> query)._wheres[0].predicate.value).to.equal(now)
+  })
 })
 
 class TestCriteria {

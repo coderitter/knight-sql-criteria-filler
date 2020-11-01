@@ -1,4 +1,4 @@
-import { CreateCriteria, Criteria, DeleteCriteria, ReadCriteria, UpdateCriteria, isOperatorAndValue } from 'mega-nice-criteria'
+import { CreateCriteria, Criteria, DeleteCriteria, isOperatorAndValue, ReadCriteria, UpdateCriteria } from 'mega-nice-criteria'
 import { Query } from 'mega-nice-sql'
 
 export function fillCriteria(query: Query, criteria: Criteria|undefined, columns: string[], alias?: string) {
@@ -83,8 +83,8 @@ export function fillCriteria(query: Query, criteria: Criteria|undefined, columns
               }
             }
           }
-          else if (typeof value === 'object') {
-            if (value.operator != undefined && value.value !== undefined) {
+          else if (typeof value === 'object' && Object.keys(value).length <= 2 && 'operator' in value) {
+            if (value.value !== undefined) {
               query.where(aliasPrefix + column, value.operator, value.value)
             }
           }
