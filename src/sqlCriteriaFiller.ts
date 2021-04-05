@@ -1,5 +1,5 @@
-import { CreateCriteria, Criteria, DeleteCriteria, isOperatorAndValue, ReadCriteria, UpdateCriteria } from 'mega-nice-criteria'
-import { Query } from 'mega-nice-sql'
+import { CreateCriteria, Criteria, DeleteCriteria, isOperatorAndValue, ReadCriteria, UpdateCriteria } from 'knight-criteria'
+import { Query } from 'knight-sql'
 
 export function fillCriteria(query: Query, criteria: Criteria|undefined, columns: string[], alias?: string) {
   // console.debug('query', query)

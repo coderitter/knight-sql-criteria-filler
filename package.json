@@ -1,15 +1,15 @@
 {
-  "name": "mega-nice-sql-criteria-filler",
-  "version": "6.1.2",
-  "description": "A mega nice SQL query criteria filler",
+  "name": "knight-sql-criteria-filler",
+  "version": "1.0.0",
+  "description": "A SQL query criteria filler.",
   "main": "lib/sqlCriteriaFiller.js",
   "types": "lib/sqlCriteriaFiller.d.ts",
   "files": [
     "lib/**/*"
   ],
   "dependencies": {
-    "mega-nice-criteria": "^5.2.0",
-    "mega-nice-sql": "^2.2.0"
+    "knight-criteria": "^1.0.0",
+    "knight-sql": "^1.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.14",
@@ -25,14 +25,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/c0deritter/mega-nice-sql-criteria-filler.git"
+    "url": "git+https://github.com/c0deritter/knight-sql-criteria-filler.git"
   },
   "keywords": [
     ""
   ],
   "author": "Coderitter GmbH",
   "bugs": {
-    "url": "https://github.com/c0deritter/mega-nice-sql-criteria-filler/issues"
+    "url": "https://github.com/c0deritter/knight-sql-criteria-filler/issues"
   },
-  "homepage": "https://github.com/c0deritter/mega-nice-sql-criteria-filler#readme"
+  "homepage": "https://github.com/c0deritter/knight-sql-criteria-filler#readme"
 }
