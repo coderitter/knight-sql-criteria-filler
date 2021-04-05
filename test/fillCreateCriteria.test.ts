@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import sql from 'mega-nice-sql'
+import sql from 'knight-sql'
 import 'mocha'
 import { fillCreateCriteria } from '../src/sqlCriteriaFiller'
 
