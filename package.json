@@ -1,7 +1,7 @@
 {
   "name": "knight-sql-criteria-filler",
   "version": "1.0.0",
-  "description": "A SQL query criteria filler.",
+  "description": "A SQL query criteria filler",
   "main": "lib/sqlCriteriaFiller.js",
   "types": "lib/sqlCriteriaFiller.d.ts",
   "files": [
